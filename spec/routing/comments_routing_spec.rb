@@ -41,7 +41,7 @@ RSpec.describe 'routes for comments' do
   end
 
   it 'routes' do
-    expect(delete('')).to route_to(
+    expect(delete('/articles/1/comments/2')).to route_to(
       controller: 'comments',
       action: 'destroy',
       article_id: '1',
