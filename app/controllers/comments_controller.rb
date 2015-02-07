@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @comments = @article.comments
   end
   def new
-    @comment = @article.comments.new
+    @comment = Comment.new
   end
   def show
     @comment = @article.comments.find(params[:id])
@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @article.comments.create(comment_params)
     if @comment.save
+      flash[:success] = 'Comment successfully created.'
       redirect_to article_comments_path(@article)
     else
       render 'new'
@@ -33,8 +34,8 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @article.comments.find(params[:id])
     @comment.destroy
-    flash[:success] = 'Article successfully deleted.'
-    redirect_to article_comments_path
+    flash[:success] = 'Comment successfully deleted.'
+    redirect_to article_comments_path(@article)
   end
 
 private
